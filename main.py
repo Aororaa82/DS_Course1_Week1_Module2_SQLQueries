@@ -25,7 +25,7 @@ df_no_moons
 # CodeGrade step2
 # Replace None with your code
 df_name_seven = pd.read_sql("""
-SELECT name,mass
+SELECT *
 FROM planets
 WHERE  length(name) = 7;
 """,conn1)
@@ -96,17 +96,13 @@ df_hungry_ages
 # CodeGrade step8
 # Replace None with your code
 df_4_oldest = pd.read_sql(""" 
-SELECT name,age ,breed
-FROM(
-    SELECT name,age ,breed
-    FROM dogs
-    ORDER BY age
-    LIMIT 4
-)
+SELECT name, age, breed
+FROM dogs
+WHERE age >= (SELECT age FROM dogs ORDER BY age DESC LIMIT 1 OFFSET 3)
 ORDER BY breed;
-
-""",conn2)
+""", conn2)
 df_4_oldest
+
 
 # CodeGrade step0
 
